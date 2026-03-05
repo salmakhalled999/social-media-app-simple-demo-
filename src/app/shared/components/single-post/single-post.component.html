@@ -1,0 +1,61 @@
+@for (post of postList; track post._id) {
+<section class="w-1/2 mx-auto p-5 rounded-lg bg-white my-2">
+    <div class="flex justify-between">
+        <div class="flex gap-x-4">
+            <img class="size-10 rounded-full" [src]="post.user.photo" alt="">
+            <div>
+                <h2> {{post.user.name}} </h2>
+                <p> {{post.createdAt}} </p>
+            </div>
+        </div>
+        <div>
+            <i class="fa-solid fa-ellipsis cursor-pointer"></i>
+        </div>
+    </div>
+    <div class="cursor-pointer" [routerLink]="['/postDetails', post._id]" >
+        <p class="my-2"> {{post.body}} </p>
+        @if (post.image) {
+        <img class="w-full rounded-lg" [src]="post.image" alt="">
+        }
+        @else{
+        <img class="w-full rounded-lg" src="/images/Route-New-Logo.jpeg" alt="">
+        }
+    </div>
+
+
+    <button #showCommentsBtn class="text-blue-700 my-2 cursor-pointer">Show Comments</button>
+
+    <div class="max-h-100 my-2 overflow-y-scroll">
+        @defer (on interaction(showCommentsBtn)) {
+        <!-- comments -->
+        <app-comments [postId]="post._id"></app-comments>
+        }
+    </div>
+
+
+    <!-- create comment -->
+    <div>
+
+        <form (submit)="createComment($event , post._id)">
+            <label for="chat" class="sr-only">Your message</label>
+            <div class="flex items-center px-3 py-2 rounded-base bg-neutral-secondary-soft">
+
+                <textarea id="chat" rows="1" [formControl]="commentValue"
+                    class="mx-4 bg-neutral-primary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 placeholder:text-body"
+                    placeholder="Your Comment..."></textarea>
+                <button type="submit"
+                    class="inline-flex justify-center p-2 text-fg-brand rounded-full cursor-pointer hover:bg-brand-softer">
+                    <svg class="w-6 h-6 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m12 18-7 3 7-18 7 18-7-3Zm0 0v-5" />
+                    </svg>
+                    <span class="sr-only">Send message</span>
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</section>
+}

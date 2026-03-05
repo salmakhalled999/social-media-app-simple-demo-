@@ -1,0 +1,15 @@
+@for (comment of commentList; track comment._id) {
+    <section class="p-5 rounded-lg border border-gray-100 bg-gray-50">
+    <div class="flex justify-between">
+        <div class="flex items-center gap-x-2">
+            <img class="size-10 rounded-full" [src]="comment.commentCreator.photo" alt="">
+            <h2 class="text-gray-800 font-bold"> {{comment.commentCreator.name}} </h2>
+            <span class="text-gray-600"> {{comment.createdAt}} </span>
+        </div>
+        <div>
+            <i class="fa-solid fa-ellipsis cursor-pointer"></i>
+        </div>
+    </div>
+    <p class="text-gray-600 my-2"> {{comment.content}} </p>
+</section>
+}

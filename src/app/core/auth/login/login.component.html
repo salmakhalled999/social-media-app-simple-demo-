@@ -1,0 +1,111 @@
+<section class="w-1/2 mx-auto shadow-lg rounded-lg p-4">
+    <h2 class="text-blue-700 text-center text-2xl font-extrabold">Log in</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="signIn()" class="flex flex-col gap-4 mt-4">
+
+
+        <div>
+            <div class="relative">
+                <input type="email" id="userEmail" formControlName="email"
+                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
+                    placeholder=" " />
+                <label for="userEmail"
+                    class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-neutral-primary px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Email</label>
+            </div>
+
+            @let email=loginForm.get('email');
+            @if (email?.errors && email?.touched) {
+            <div class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-danger-subtle"
+                role="alert">
+                <svg class="w-4 h-4 me-2 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are met:</span>
+                    <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+                        @if (email?.getError('required')) {
+                        <li>Email is required</li>
+                        }
+                        @if (email?.getError('email')) {
+                        <li>Must be a valid email(ex: ay7aga@gmail.com)</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+
+
+
+        <div>
+            <div class="relative">
+                <input type="password" id="userPassword" formControlName="password"
+                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
+                    placeholder=" " />
+                <label for="userPassword"
+                    class="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-neutral-primary px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Password</label>
+            </div>
+
+            @let password = loginForm.get('password');
+            @if (password?.errors && password?.touched) {
+            <div class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-danger-subtle"
+                role="alert">
+                <svg class="w-4 h-4 me-2 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are met:</span>
+                    <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+                        @if (password?.getError('required')) {
+                        <li>Password is required</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+
+
+        <div>
+            @if (errorMsg) {
+            <div class="flex items-start sm:items-center p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+                role="alert">
+                <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <p> {{errorMsg}}
+                </p>
+            </div>
+            }
+            @else if (successMsg) {
+            <div class="flex items-start sm:items-center p-4 mb-4 text-sm text-fg-success-strong rounded-base bg-success-soft"
+                role="alert">
+                <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <p> {{successMsg}}
+                </p>
+            </div>
+            }
+        </div>
+
+        <button [disabled]="loginForm.invalid || isLoading" type="submit"
+            class="disabled:cursor-not-allowed disabled:hover:bg-white disabled:text-blue-300 disabled:border-blue-300 text-blue-700 border-2 border-blue-700 px-2 py-1 rounded-md hover:bg-blue-700 hover:text-white transition cursor-pointer self-center">
+            Sign in 
+            @if (isLoading) {
+                <i class="fa-solid fa-spinner fa-spin"></i>
+            }
+        </button>
+    </form>
+</section>
