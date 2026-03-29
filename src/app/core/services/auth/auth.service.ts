@@ -13,11 +13,11 @@ export class AuthService {
 
 
   signUp(data:any):Observable<any>{
-    return this.httpClient.post(environment.baseUrl+'/users/signup',data)
+    return this.httpClient.post(environment.baseUrl+'users/signup',data)
   }
 
   signIn(data:any):Observable<any>{
-    return this.httpClient.post(environment.baseUrl+'/users/signin',data)
+    return this.httpClient.post(environment.baseUrl+'users/signin',data)
   }
 
   logOut(){
